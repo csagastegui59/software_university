@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
@@ -16,11 +16,17 @@ import { LoggingInterceptor } from './logging.interceptor';
 import { ErrorInterceptor } from './error.interceptor';
 import { HealthController } from './health.controller';
 
+const isCacheEnabled = process.env.CACHE_ENABLED === 'true';
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
-      // envFilePath: '.production.env',
+      isGlobal: true,
+    }),
+    CacheModule.register({
+      ttl: 60,
+      max: 10,
+      isCacheEnabled: isCacheEnabled,
     }),
   ],
   controllers: [
