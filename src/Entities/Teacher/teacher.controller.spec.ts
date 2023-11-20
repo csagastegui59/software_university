@@ -2,22 +2,38 @@ import { TeacherController } from './teacher.controller';
 import { TeacherService } from './teacher.service';
 import { PrismaService } from '../../prisma.service';
 import { Test, TestingModule } from '@nestjs/testing';
+import { CacheInterceptor, CACHE_MANAGER } from '@nestjs/common';
 
 describe('TeacherController', () => {
   let teacherController: TeacherController;
   let prismaService: PrismaService;
+  let interceptor: CacheInterceptor;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [TeacherService, TeacherController, PrismaService],
+      providers: [
+        CacheInterceptor,
+        {
+          provide: CACHE_MANAGER,
+          useValue: {
+            get: jest.fn(),
+            set: jest.fn(),
+          },
+        },
+        TeacherService,
+        TeacherController,
+        PrismaService,
+      ],
       imports: [PrismaService],
     }).compile();
     teacherController = module.get<TeacherController>(TeacherController);
+    interceptor = module.get<CacheInterceptor>(CacheInterceptor);
     prismaService = module.get<PrismaService>(PrismaService);
   });
 
   describe('createOne', () => {
     it('should create a teacher', async () => {
+      await prismaService.clearTeachersTable();
       const teacher = {
         name: 'John',
         lastName: 'Doe',

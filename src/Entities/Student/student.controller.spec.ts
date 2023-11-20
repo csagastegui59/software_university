@@ -3,18 +3,33 @@ import { StudentService } from './student.service';
 import { PrismaService } from '../../prisma.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as nock from 'nock';
+import { CacheInterceptor, CacheModule, CACHE_MANAGER } from '@nestjs/common';
 
 describe('StudentController', () => {
   let studentController: StudentController;
   let prismaService: PrismaService;
+  let interceptor: CacheInterceptor;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [StudentService, StudentController, PrismaService],
-      imports: [PrismaService],
+      providers: [
+        CacheInterceptor,
+        {
+          provide: CACHE_MANAGER,
+          useValue: {
+            get: jest.fn(),
+            set: jest.fn(),
+          },
+        },
+        StudentService,
+        StudentController,
+        PrismaService,
+      ],
+      imports: [PrismaService, CacheModule.register()],
     }).compile();
     studentController = module.get<StudentController>(StudentController);
     prismaService = module.get<PrismaService>(PrismaService);
+    interceptor = module.get<CacheInterceptor>(CacheInterceptor);
     nock('https://jsonplaceholder.typicode.com').post('/users').reply(200, {
       name: 'John',
       lastName: 'Doe',

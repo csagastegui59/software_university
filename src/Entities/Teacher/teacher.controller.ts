@@ -1,4 +1,15 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  CacheInterceptor,
+  CacheKey,
+  CacheTTL,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseInterceptors,
+} from '@nestjs/common';
 import { TeacherService } from './teacher.service';
 import { CreateTeacherDto } from './dto/req/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/req/update-teacher.dto';
@@ -8,11 +19,16 @@ import { Teacher } from './teacher.interface';
 export class TeacherController {
   constructor(private teacherService: TeacherService) {}
   @Get()
+  @CacheKey('teachersgetall')
+  @CacheTTL(60)
+  @UseInterceptors(CacheInterceptor)
   getAllTeachers(): Promise<Teacher[]> {
     return this.teacherService.getAllTeachers();
   }
 
   @Get('/:teacherId')
+  @CacheKey('teachersgetOne')
+  @CacheTTL(60)
   getTeacherById(@Param('teacherId') teacherId: string): Promise<Teacher> {
     return this.teacherService.getTeacherById(teacherId);
   }
