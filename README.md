@@ -24,22 +24,24 @@ $ npx prisma migrate dev
 $ npm run test
 ~~~
 
-![image](https://github.com/csagastegui59/software_university/assets/45051315/92a30e6e-efd4-4f68-b6f0-82c5def2d3d4)
+![image](https://github.com/csagastegui59/software_university/assets/45051315/32826d79-608c-4912-96f3-74c7711028b2)
 
 ### If you are using Postman to test the app endpoints
 
 We are using env variables, you can change it with your own credentials like this
-![image](https://github.com/csagastegui59/software_university/assets/45051315/e28a3650-e603-477b-93a1-f5e4b94648bc)
+![image](https://github.com/csagastegui59/software_university/assets/45051315/fc9428e8-3523-4fe0-adb7-9b34c68b3873)
 
 ### Testing endpoints using Postman
-![image](https://github.com/csagastegui59/software_university/assets/45051315/7e4f64d4-7444-4c3d-a432-1c16bb692145)
 
-![image](https://github.com/csagastegui59/software_university/assets/45051315/f9c4d1d8-9f4d-4405-94e3-c39239633791)
+![image](https://github.com/csagastegui59/software_university/assets/45051315/70984c98-ca6e-41ae-ac4b-b04e16c5587d)
+
+![image](https://github.com/csagastegui59/software_university/assets/45051315/b5cc2ee8-607b-407c-9f75-96fc7b32b599)
 
 ### "LOG_RESPONSE_TIME=true" and "LOG_UNHANDLED_ERRORS=true" 
 
 In case you set the variables to true you will see a file called "errors.log" that will save all the errors returned and a file called "response-times.log" that will fill every time you make a call to an endpoint
-![image](https://github.com/csagastegui59/software_university/assets/45051315/649d8c5d-4ce8-4b3c-a9ef-4c7f544773d2)
+
+![image](https://github.com/csagastegui59/software_university/assets/45051315/364952a2-ca96-4691-8b7e-cd759044b631)
 
 ## Stay in touch
 
