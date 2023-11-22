@@ -11,7 +11,7 @@ $ npm install
 ### Configure .env file using your own credentials
 
 Don't forget to create your database for local environment. You can find an example of the credentials needed on the .env.example file. In this file you can change the values to enable different behaviors on the application, like enable the log response time to do not log response time on the controller routes or viceversa.
-![image](https://github.com/csagastegui59/software_university/assets/45051315/6812a338-0b87-4bb3-91f0-5ff09a44bb42)
+![image](https://github.com/csagastegui59/software_university/assets/45051315/a50f52eb-dcd0-497f-b581-899928b0b03c)
 
 ### Run migrations
 ~~~
